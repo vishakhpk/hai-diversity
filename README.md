@@ -13,7 +13,7 @@ python3 read_single_file.py <path to jsonl>
 
 ## Processed Essay Data
 
-In the processed\_data/ folder we also link the essays from the experiment in a set of jsonl files. Each essay item can be read as a JSON and has the following keys
+In the processed\_data/ folder we also link the essays from the experiment in a set of jsonl files. Each essay item can be read into a dictionary object with the following keys
 ```
 (Pdb) obj.keys()
 dict_keys(['essay', 'path', 'prompt', 'title', 'summary', 'sentences', 'matched_sents', 'match_scores', 'authorship'])
@@ -29,3 +29,10 @@ Each key corresponds to the following:
 - **match_scores**: Rouge scores used to create the mapping
 - **authorship**: The mapping of each sentence in the essay to whether it was written by the model or the user. Stored as a list of length equal to the number of sentences, each with either 'U' meaning the sentence was written in majority by the user or 'A' if the majority was by the model
 
+## Scripts
+
+- **Summarizing essays**: Script that accepts a jsonl file containing the processed essays and summarizes them using GPT3.5. Here each dictionary object should have a key 'essay' to be summarized which will be stored in 'summary'. The script also requires you to update your OpenAI API key as an environment variable. 
+```
+export OPENAI_API_KEY=<your key>
+python summarize_essays.py <input jsonl file>
+```
